@@ -78,9 +78,9 @@ bool parse_read_capacity_16(unsigned char *buf, unsigned buf_len, uint64_t *max_
 	if (logical_blocks_per_physical_block_exponent)
 		*logical_blocks_per_physical_block_exponent = buf[13] & 0xf;
 	if (thin_provisioning_enabled)
-		*thin_provisioning_enabled = buf[14] & 0x80;
+		*thin_provisioning_enabled = (0 != (buf[14] & 0x80));
 	if (thin_provisioning_zero)
-		*thin_provisioning_zero = buf[14] & 0x40;
+		*thin_provisioning_zero = (0 != (buf[14] & 0x40));
 	if (*lowest_aligned_lba)
 		*lowest_aligned_lba = (buf[14] & 0x3f) << 8 | buf[15];
 	return true;

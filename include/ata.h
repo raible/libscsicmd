@@ -17,8 +17,8 @@
 #ifndef LIBSCSICMD_ATA_H
 #define LIBSCSICMD_ATA_H
 
-#include <stdint.h>
-#include <stdbool.h>
+//#include <stdint.h>
+//#include <stdbool.h>
 #include "scsicmd.h"
 
 typedef uint16_t ata_word_t;
@@ -82,7 +82,7 @@ static inline uint16_t ata_get_bits(const char *buf, int word, int start_bit, in
 
 static inline bool ata_get_bit(char *buf, int word, int bit)
 {
-	return ata_get_bits(buf, word, bit, bit);
+	return !!ata_get_bits(buf, word, bit, bit);
 }
 
 static inline char *ata_get_string(const char *buf, int word_start, int word_end, char *str)

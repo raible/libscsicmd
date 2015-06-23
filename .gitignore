@@ -18,3 +18,12 @@ scsi_read_capacity_10
 scsi_read_capacity_16
 scsi_inquiry
 scsi_log_sense
+
+Debug/
+ipch/
+*.ncb
+*.opensdf
+*.opt
+*.plg
+*.sdf
+*.suo

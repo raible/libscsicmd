@@ -37,16 +37,16 @@ static inline uint64_t scsi_get_64(unsigned char *buf, int idx)
 
 static void parse_sense_key_specific(unsigned char *sks, sense_info_t *info)
 {
-        info->sense_key_specific_valid = sks[0] & 0x80;
+        info->sense_key_specific_valid = !!(sks[0] & 0x80);
         if (info->sense_key_specific_valid)
         {
                 uint32_t sense_key_specific = scsi_get_24(sks, 0) & 0x007FFFFF;
                 switch (info->sense_key) {
                         case SENSE_KEY_ILLEGAL_REQUEST:
-                                info->sense_key_specific.illegal_request.command_error = sense_key_specific & 0x400000;
-                                info->sense_key_specific.illegal_request.bit_pointer_valid = sense_key_specific & 0x080000;
+                                info->sense_key_specific.illegal_request.command_error = !!(sense_key_specific & 0x400000);
+                                info->sense_key_specific.illegal_request.bit_pointer_valid = !!(sense_key_specific & 0x080000);
                                 info->sense_key_specific.illegal_request.bit_pointer = (sense_key_specific & 0x070000) >> 16;
-                                info->sense_key_specific.illegal_request.command_error = sense_key_specific & 0xFFFF;
+                                info->sense_key_specific.illegal_request.command_error = !!(sense_key_specific & 0xFFFF);
                                 break;
                         case SENSE_KEY_HARDWARE_ERROR:
                         case SENSE_KEY_MEDIUM_ERROR:
@@ -58,13 +58,13 @@ static void parse_sense_key_specific(unsigned char *sks, sense_info_t *info)
                                 info->sense_key_specific.not_ready.progress = ((double)(sense_key_specific & 0xFFFF))/65536.0;
                                 break;
                         case SENSE_KEY_COPY_ABORTED:
-                                info->sense_key_specific.copy_aborted.segment_descriptor = sense_key_specific & 0x200000;
-                                info->sense_key_specific.copy_aborted.bit_pointer_valid = sense_key_specific & 0x080000;
+                                info->sense_key_specific.copy_aborted.segment_descriptor = !!(sense_key_specific & 0x200000);
+                                info->sense_key_specific.copy_aborted.bit_pointer_valid = !!(sense_key_specific & 0x080000);
                                 info->sense_key_specific.copy_aborted.bit_pointer = (sense_key_specific & 0x070000) >> 16;
                                 info->sense_key_specific.copy_aborted.field_pointer = sense_key_specific & 0xFFFF;
                                 break;
                         case SENSE_KEY_UNIT_ATTENTION:
-                                info->sense_key_specific.unit_attention.overflow = sense_key_specific & 0x010000;
+                                info->sense_key_specific.unit_attention.overflow = !!(sense_key_specific & 0x010000);
                                 break;
                         default:
                                 info->sense_key_specific_valid = false;
@@ -78,11 +78,11 @@ static bool parse_sense_fixed(unsigned char *sense, int sense_len, sense_info_t 
         if (sense_len < 18)
                 return false;
 
-        info->information_valid = sense[0] & 0x80;
+        info->information_valid = !!(sense[0] & 0x80);
         if (info->information_valid)
                 info->information = scsi_get_32(sense, 3);
 
-        info->incorrect_len_indicator = sense[2] & 0x20;
+        info->incorrect_len_indicator = !!(sense[2] & 0x20);
         info->sense_key = sense[2] & 0xF;
         info->asc = sense[12];
         info->ascq = sense[13];
@@ -129,7 +129,7 @@ static bool parse_sense_descriptor(unsigned char *sense, int sense_len, sense_in
                 switch (desc_type) {
                         case 0x00: // Information
                                 if (desc_len == 0x0A) {
-                                        info->information_valid = sense[idx+2] & 0x80;
+                                        info->information_valid = !!(sense[idx+2] & 0x80);
                                         info->information = scsi_get_64(sense, idx+4);
                                 }
                                 break;
@@ -154,7 +154,7 @@ static bool parse_sense_descriptor(unsigned char *sense, int sense_len, sense_in
                                 break;
                         case 0x05: // Block commands
                                 if (desc_len == 0x02) {
-                                        info->incorrect_len_indicator = sense[idx+3] & 0x20;
+                                        info->incorrect_len_indicator = !!(sense[idx+3] & 0x20);
                                 }
                                 break;
                         case 0x06: // OSD object identification

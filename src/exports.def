@@ -1,0 +1,23 @@
+EXPORTS
+	; ata.c
+	ata_status_from_scsi_sense
+	ata_get_ata_smart_read_data_version
+	ata_parse_ata_smart_read_data
+	ata_parse_ata_smart_read_thresh
+
+	; cdb.c
+	cdb_tur
+	cdb_inquiry
+	cdb_read_capacity_10
+	cdb_read_capacity_16
+	cdb_read_10
+	cdb_write_10
+	cdb_log_sense
+
+	; parse_inquiry.c
+	parse_inquiry
+	scsi_device_type_name
+
+	; parse_read_cap.c
+	parse_read_capacity_10
+	parse_read_capacity_16

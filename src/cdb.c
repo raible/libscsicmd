@@ -87,7 +87,7 @@ int cdb_read_10(unsigned char *cdb, bool fua, uint64_t lba, uint16_t transfer_le
 	const int LEN = 10;
 	cdb[0] = 0x28;
 	cdb[1] = fua << 3;
-	set_uint32(cdb, 2, lba);
+	set_uint32(cdb, 2, uint32_t(lba));
 	cdb[6] = 0;
 	set_uint16(cdb, 7, transfer_length_blocks);
 	cdb[9] = 0;
@@ -99,7 +99,7 @@ int cdb_write_10(unsigned char *cdb, bool fua, uint64_t lba, uint16_t transfer_l
 	const int LEN = 10;
 	cdb[0] = 0x2A;
 	cdb[1] = fua << 3;
-	set_uint32(cdb, 2, lba);
+	set_uint32(cdb, 2, uint32_t(lba));
 	cdb[6] = 0;
 	set_uint16(cdb, 7, transfer_length_blocks);
 	cdb[9] = 0;

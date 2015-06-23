@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libscsicmd", "libscsicmd.vcxproj", "{3E4153B3-E449-EFC8-A8EC-7E705B2CBDFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E4153B3-E449-EFC8-A8EC-7E705B2CBDFF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E4153B3-E449-EFC8-A8EC-7E705B2CBDFF}.Debug|Win32.Build.0 = Debug|Win32
+		{3E4153B3-E449-EFC8-A8EC-7E705B2CBDFF}.Release|Win32.ActiveCfg = Release|Win32
+		{3E4153B3-E449-EFC8-A8EC-7E705B2CBDFF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

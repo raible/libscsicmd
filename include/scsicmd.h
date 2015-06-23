@@ -17,8 +17,12 @@
 #ifndef LIBSCSICMD_H
 #define LIBSCSICMD_H
 
-#include <stdbool.h>
-#include <stdint.h>
+//#include <stdbool.h>
+//#include <stdint.h>
+typedef unsigned __int8  uint8_t;
+typedef unsigned __int16 uint16_t;
+typedef unsigned __int32 uint32_t;
+typedef unsigned __int64 uint64_t;
 
 #include "sense_key_list.h"
 #include "asc_num_list.h"

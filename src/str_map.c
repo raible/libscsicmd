@@ -30,12 +30,12 @@ const char *asc_num_to_name(uint8_t asc, uint8_t ascq)
 #undef SENSE_CODE_KEYED
 	}
 
-#define SENSE_CODE_KEYED(_asc_, _fmt_) if (asc == _asc_) { snprintf(msg, sizeof(msg), _fmt_, ascq); return msg; }
+#define SENSE_CODE_KEYED(_asc_, _fmt_) if (asc == _asc_) { _snprintf(msg, sizeof(msg), _fmt_, ascq); return msg; }
 #define SENSE_CODE(_asc_, _ascq_, _msg_)
 	ASC_NUM_LIST
 #undef SENSE_CODE
 #undef SENSE_CODE_KEYED
 
-	snprintf(msg, sizeof(msg), "UNKNOWN ASC/ASCQ (%02Xh/%02Xh)", asc, ascq);
+	_snprintf(msg, sizeof(msg), "UNKNOWN ASC/ASCQ (%02Xh/%02Xh)", asc, ascq);
 	return msg;
 }
